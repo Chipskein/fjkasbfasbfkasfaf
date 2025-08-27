@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simple User CRUD – Tailwind</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-800 antialiased">
+    <header class="border-b bg-white">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 class="text-2xl font-semibold tracking-tight">User Management</h1>
+        <div class="flex items-center gap-2">
+          <button class="inline-flex items-center gap-2 rounded-xl bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4"><path d="M12 4.5a.75.75 0 0 1 .75.75v6h6a.75.75 0 0 1 0 1.5h-6v6a.75.75 0 0 1-1.5 0v-6h-6a.75.75 0 0 1 0-1.5h6v-6A.75.75 0 0 1 12 4.5Z"/></svg>
+            Add User
+          </button>
+          <button class="inline-flex items-center gap-2 rounded-xl bg-black text-white px-3 py-2 text-sm font-medium hover:bg-gray-800">
+            Export
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-6">
+      <!-- Filters / Toolbar (static) -->
+      <form action="">
+      <section class="mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="relative">
+              <input type="text" placeholder="Search users..." class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="search"/>
+              <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-gray-500"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 1 0 13.5 6.75 6.75 0 0 1 0-13.5Zm0 1.5a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5Zm8.03 13.28a.75.75 0 1 1-1.06 1.06l-3.25-3.25a.75.75 0 0 1 1.06-1.06l3.25 3.25Z" clip-rule="evenodd"/></svg>
+              </div>
+          </div>
+          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="role">
+            <option value="">All Roles</option>
+            <option value="admin">Admin</option>
+            <option value="manager">Manager</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
+          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="status">
+            <option value="">Any Status</option>
+            <option value="active">Active</option>
+            <option value="invited">Invited</option>
+            <option value="Suspended">Suspended</option>
+          </select>
+          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="sort">
+            <option value="new">Sort: Newest</option>
+            <option value="old">Sort: Oldest</option>
+            <option value="za">Sort: A → Z</option>
+            <option value="az">Sort: Z → A</option>
+          </select>
+      </section>
+      </form>
+
+
+      <!-- Users Table -->
+      <section class="bg-white border rounded-2xl shadow-sm">
+        <div class="overflow-x-auto rounded-2xl">
+          <table class="min-w-full text-left align-middle">
+            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+              <tr>
+                <th class="px-4 py-3">User</th>
+                <th class="px-4 py-3">Email</th>
+                <th class="px-4 py-3">Role</th>
+                <th class="px-4 py-3">Status</th>
+                <th class="px-4 py-3">Created</th>
+                <th class="px-4 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <% for(const user of users) { %>
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3">
+                    <div class="flex items-center gap-3">
+                        
+                        <span class="inline-flex size-9 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold">
+                            <%=user.st_sigla %>
+                        </span>
+
+                        <div>
+                        <div class="font-medium">
+                            <%=user.st_name %>
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <%=user.st_username %>
+                        </div>
+                        </div>
+                    </div>
+                    </td>
+                    <td class="px-4 py-3">
+                        <%=user.st_email %>
+                    </td>
+                    <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium">
+                        <%=user.st_role %>
+                    </span>
+                    </td>
+                    <td class="px-4 py-3">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700">
+                        <span class="size-1.5 rounded-full bg-green-600">
+                            <%=user.st_status %>
+                        </span>
+                    </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-600">
+                        <%=user.dt_created %>
+                    </td>
+                    <td class="px-4 py-3">
+                    <div class="flex items-center justify-end gap-2">
+                        <a href="#" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
+                        <button class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</button>
+                    </div>
+                    </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination (static) -->
+        <div class="flex items-center justify-between px-4 py-3 border-t bg-gray-50">
+          <p class="text-sm text-gray-600">Showing <span class="font-medium">1–10</span> of <span class="font-medium"><%=pagination.totalUsers%></span> users</p>
+          <nav class="inline-flex items-center gap-1">
+            <% if(pagination.hasPrevius) { %>
+                <a href="?page=<%=page%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Previous</a>
+            <%}%>
+            
+            <%for (let page=0;page<pagination.pageNumbers;page++){%>
+                <%if(pagination.currentPage === page){%>
+                    <a href="?page=<%=page+1%>" class="rounded-xl bg-black text-white px-3 py-1.5 text-sm">
+                        <%=page+1%>
+                    </a>
+                <%} else {%>
+                    <a href="?page=<%=page+1%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">
+                        <%=page+1%>
+                    </a>
+                <%}%>
+            <%}%>
+            <% if(pagination.hasNext) { %>
+                <a href="?page=<%=page+2%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Next</a>    
+            <%}%>
+          </nav>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-10 text-center text-xs text-gray-500">
+      Built with Tailwind CSS – no JavaScript included.
+    </footer>
+  </body>
+</html>
