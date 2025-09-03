@@ -1,4 +1,7 @@
 const database = require('../config/db')
+const { hash } = require('bcrypt')
+const { convertToCSV } = require('../utils/csv')
+const { getStSigla } = require('../utils/strings')
 module.exports={
 
     async get(req,res){
@@ -43,11 +46,7 @@ module.exports={
         const totalPages = Math.ceil(totalUsers / limit);
         const hasNext = page < totalPages;
         const hasPrevious = page > 1;
-        const pageNumbers = [];
-        const startPage = Math.max(1, page - 2);
-        const endPage = Math.min(totalPages, page + 2);
-        for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
-        return res.render("table",{
+        const pageData={
             users,
             pagination:{
                 totalUsers,
@@ -56,19 +55,25 @@ module.exports={
                 limit,
                 hasNext,
                 hasPrevious,
-                startItem: Math.min(offset + 1, totalUsers),
-                endItem: Math.min(offset + limit, totalUsers),
-                pageNumbers,
                 nextPage: page + 1,
                 prevPage: page - 1
             }
-        })
+        }
+        return res.render("table",pageData)
+    },
+
+    async export(req,res){
+        const { users } = database;
+        const csv = convertToCSV(users);
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', `attachment; filename="UsersDump${new Date().getTime()}.csv"`);
+        return res.status(200).send(csv);
     },
     
     async renderSaveForm(req,res){
         const { user_id } = req.params
         let user = null
-        if(user_id) user = database.users.find(u=>u.in_id = user_id)
+        if(user_id) user = database.users.find(u=>u.in_id == user_id)
         return res.render("user",{user})
     },
 
@@ -85,8 +90,8 @@ module.exports={
         if(!st_name|| st_name.trim()=='') throw new Error("Nome invalido")
         if(!st_email|| st_email.trim()=='') throw new Error("Email invalido")
         if(st_password!==st_confirm_password) throw new Error("Senha não conferem")
-        if(['active','invited','suspended'].includes(st_status.toLowerCase())) throw new Error("Status inválido")
-        if(['manager','viewer','admin','editor'].includes(st_role.toLowerCase())) throw new Error("Role inválido")
+        if(!['active','invited','suspended'].includes(st_status.toLowerCase())) throw new Error("Status inválido")
+        if(!['manager','viewer','admin','editor'].includes(st_role.toLowerCase())) throw new Error("Role inválido")
         if(user_id){
             let index = database.users.findIndex(u=>u.in_id = user_id)
             let user  = database.users.find(u=>u.in_id = user_id)
@@ -94,28 +99,36 @@ module.exports={
                 ...user,
                 st_name,
                 st_email,
-                st_password,
+                st_password:await hash(st_password,10),
                 st_role: st_role?.toLowerCase(),
                 st_status: st_status?.toLowerCase(),
-                dt_updated:new Date().toISOString()
+                dt_updated:new Date().toISOString(),
+                st_sigla: st_name!==user.st_name ? getStSigla(st_name):user.st_sigla
             }
         } else{
             database.users.push({
                 in_id:database.users.length,
                 st_name,
                 st_email,
-                st_password,
-                st_confirm_password,
+                st_password:await hash(st_password,10),
                 st_role,
                 st_status,
                 st_username:`@${st_name.toLowerCase()}`,
-                st_sigla:`${st_name[0]}${st_name.split(" "),[1][1]}`,
+                st_sigla:getStSigla(st_name),
                 dt_created:new Date().toISOString(),
                 dt_updated:new Date().toISOString(),
             })
         }
 
         return res.redirect("/users/")
+    },
+
+    async deleteUser(req,res){
+        const { user_id } = req.params
+        let index = database.users.findIndex(u=>u.in_id == user_id)
+        const foundUser=index!==-1
+        if(foundUser) database.users.splice(index,1)
+        return res.redirect('/users')
     }
     
 }

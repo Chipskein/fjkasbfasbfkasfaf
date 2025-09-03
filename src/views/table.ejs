@@ -8,21 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-50 text-gray-800 antialiased">
-    <header class="border-b bg-white">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 class="text-2xl font-semibold tracking-tight">User Management</h1>
-        <div class="flex items-center gap-2">
-          <button class="inline-flex items-center gap-2 rounded-xl bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4"><path d="M12 4.5a.75.75 0 0 1 .75.75v6h6a.75.75 0 0 1 0 1.5h-6v6a.75.75 0 0 1-1.5 0v-6h-6a.75.75 0 0 1 0-1.5h6v-6A.75.75 0 0 1 12 4.5Z"/></svg>
-            Add User
-          </button>
-          <button class="inline-flex items-center gap-2 rounded-xl bg-black text-white px-3 py-2 text-sm font-medium hover:bg-gray-800">
-            Export
-          </button>
-        </div>
-      </div>
-    </header>
-
+    <%- include('components/header', {}) %>
     <main class="max-w-6xl mx-auto px-4 py-6">
       <!-- Filters / Toolbar (static) -->
       <form action="">
@@ -106,12 +92,12 @@
                     </span>
                     </td>
                     <td class="px-4 py-3 text-sm text-gray-600">
-                        <%=user.dt_created %>
+                      <%= new Date(user.dt_created).toISOString().split('T')[0] %>
                     </td>
                     <td class="px-4 py-3">
                     <div class="flex items-center justify-end gap-2">
-                        <a href="#" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
-                        <button class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</button>
+                        <a href="/users/edit/<%=user.in_id%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
+                        <a href="/users/delete/<%=user.in_id%>" class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
                     </div>
                     </td>
                 </tr>
@@ -124,32 +110,30 @@
         <div class="flex items-center justify-between px-4 py-3 border-t bg-gray-50">
           <p class="text-sm text-gray-600">Showing <span class="font-medium">1–10</span> of <span class="font-medium"><%=pagination.totalUsers%></span> users</p>
           <nav class="inline-flex items-center gap-1">
-            <% if(pagination.hasPrevius) { %>
-                <a href="?page=<%=page%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Previous</a>
+            <% if(pagination.hasPrevious) { %>
+                <a href="?page=<%=pagination.prevPage%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Previous</a>
             <%}%>
             
-            <%for (let page=0;page<pagination.pageNumbers;page++){%>
+            <%for (let page=1;page<=pagination.totalPages;page++){%>
                 <%if(pagination.currentPage === page){%>
-                    <a href="?page=<%=page+1%>" class="rounded-xl bg-black text-white px-3 py-1.5 text-sm">
-                        <%=page+1%>
+                    <a href="?page=<%=page%>" class="rounded-xl bg-black text-white px-3 py-1.5 text-sm">
+                        <%=page%>
                     </a>
                 <%} else {%>
-                    <a href="?page=<%=page+1%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">
-                        <%=page+1%>
+                    <a href="?page=<%=page%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">
+                        <%=page%>
                     </a>
                 <%}%>
             <%}%>
             <% if(pagination.hasNext) { %>
-                <a href="?page=<%=page+2%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Next</a>    
+                <a href="?page=<%=pagination.nextPage%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Next</a>    
             <%}%>
           </nav>
         </div>
 
       </section>
     </main>
-
-    <footer class="max-w-6xl mx-auto px-4 py-10 text-center text-xs text-gray-500">
-      Built with Tailwind CSS – no JavaScript included.
-    </footer>
+    <%- include('components/footer', {}) %>
   </body>
+  <script src="/header.js"></script>
 </html>

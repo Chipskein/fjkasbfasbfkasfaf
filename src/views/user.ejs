@@ -10,24 +10,7 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800 antialiased">
-  <header class="border-b bg-white">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-2xl font-semibold tracking-tight">User Management</h1>
-      <div class="flex items-center gap-2">
-        <button class="inline-flex items-center gap-2 rounded-xl bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-            <path d="M12 4.5a.75.75 0 0 1 .75.75v6h6a.75.75 0 0 1 0 1.5h-6v6a.75.75 0 0 1-1.5 0v-6h-6a.75.75 0 0 1 0-1.5h6v-6A.75.75 0 0 1 12 4.5Z" />
-          </svg>
-          Add User
-        </button>
-        <button class="inline-flex items-center gap-2 rounded-xl bg-black text-white px-3 py-2 text-sm font-medium hover:bg-gray-800">
-          Export
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
+    <%- include('components/header', {}) %>
     <section class="mt-8">
       <div class="grid gap-4 md:grid-cols-3">
         <div class="md:col-span-2 bg-white border rounded-2xl p-5 shadow-sm">
@@ -41,40 +24,64 @@
             <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" method="post">
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Full Name</label>
-                <input type="text" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" placeholder="Jane Doe" name="st_name"/>
+                <input 
+                  type="text" 
+                  class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
+                  placeholder="Jane Doe" 
+                  name="st_name"
+                  value="<%=user.st_name%>"
+                />
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Email</label>
-                <input type="email" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" placeholder="jane@example.com" name="st_email"/>
+                <input 
+                  type="email" 
+                  class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
+                  placeholder="jane@example.com" 
+                  name="st_email"
+                  value="<%=user.st_email%>"
+                />
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Role</label>
                 <select class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" name="st_role">
-                  <option value="viewer">Viewer</option>
-                  <option value="editor">Editor</option>
-                  <option value="manager">Manager</option>
-                  <option value="admin">Admin</option>
+                  <option value="viewer" <%= user.st_role === 'viewer' ? 'selected' : '' %>>Viewer</option>
+                  <option value="editor" <%= user.st_role === 'editor' ? 'selected' : '' %>>Editor</option>
+                  <option value="manager" <%= user.st_role === 'manager' ? 'selected' : '' %>>Manager</option>
+                  <option value="admin" <%= user.st_role === 'admin' ? 'selected' : '' %>>Admin</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Status</label>
                 <select class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" name="st_status">
-                  <option value="active">Active</option>
-                  <option value="invited">Invited</option>
-                  <option value="suspended">Suspended</option>
+                  <option value="active" <%= user.st_status === 'active' ? 'selected' : '' %>>Active</option>
+                  <option value="invited" <%= user.st_status === 'invited' ? 'selected' : '' %>>Invited</option>
+                  <option value="suspended" <%= user.st_status === 'suspended' ? 'selected' : '' %>>Suspended</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Password</label>
-                <input type="password" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" placeholder="••••••••" name="st_password"/>
+                  <input 
+                    type="password" 
+                    class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
+                    placeholder="••••••••" 
+                    name="st_password"
+                  />
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Confirm Password</label>
-                <input type="password" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" placeholder="••••••••" name="st_confirm_password"/>
+                <input 
+                  type="password" 
+                  class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
+                  placeholder="••••••••" 
+                  name="st_confirm_password"
+                />
               </div>
               <div class="sm:col-span-2 flex items-center justify-end gap-2 pt-2">
-                <button type="reset" class="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">Cancel</button>
-                <button type="button" class="rounded-xl bg-black text-white px-4 py-2 text-sm">Save</button>
+                <a href="/users">
+                  <div class="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">Cancel</div>
+                </a>
+                <button type="submit" class="rounded-xl bg-black text-white px-4 py-2 text-sm">Save</button>
               </div>
             </form>
           </div>
@@ -90,9 +97,7 @@
         </div>
       </section>
     </main>
-
-    <footer class="max-w-6xl mx-auto px-4 py-10 text-center text-xs text-gray-500">
-      Built with Tailwind CSS – no JavaScript included.
-    </footer>
+    <%- include('components/footer', {}) %>
   </body>
+  <script src="/header.js"></script>
 </html>
