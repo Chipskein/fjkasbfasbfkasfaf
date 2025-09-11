@@ -78,49 +78,54 @@ module.exports={
     },
 
     async saveForm(req,res){
-        const { user_id } = req.params
-        const {
-            st_name,
-            st_email,
-            st_password,
-            st_confirm_password,
-            st_role,
-            st_status,
-        } = req.body
-        if(!st_name|| st_name.trim()=='') throw new Error("Nome invalido")
-        if(!st_email|| st_email.trim()=='') throw new Error("Email invalido")
-        if(st_password!==st_confirm_password) throw new Error("Senha não conferem")
-        if(!['active','invited','suspended'].includes(st_status.toLowerCase())) throw new Error("Status inválido")
-        if(!['manager','viewer','admin','editor'].includes(st_role.toLowerCase())) throw new Error("Role inválido")
-        if(user_id){
-            let index = database.users.findIndex(u=>u.in_id = user_id)
-            let user  = database.users.find(u=>u.in_id = user_id)
-            database.users[index]={
-                ...user,
+        try{
+            const { user_id } = req.params
+            const {
                 st_name,
                 st_email,
-                st_password:await hash(st_password,10),
-                st_role: st_role?.toLowerCase(),
-                st_status: st_status?.toLowerCase(),
-                dt_updated:new Date().toISOString(),
-                st_sigla: st_name!==user.st_name ? getStSigla(st_name):user.st_sigla
-            }
-        } else{
-            database.users.push({
-                in_id:database.users.length,
-                st_name,
-                st_email,
-                st_password:await hash(st_password,10),
+                st_password,
+                st_confirm_password,
                 st_role,
                 st_status,
-                st_username:`@${st_name.toLowerCase()}`,
-                st_sigla:getStSigla(st_name),
-                dt_created:new Date().toISOString(),
-                dt_updated:new Date().toISOString(),
-            })
-        }
+            } = req.body
+            if(!st_name|| st_name.trim()=='') throw new Error("Nome invalido")
+            if(!st_email|| st_email.trim()=='') throw new Error("Email invalido")
+            if(st_password!==st_confirm_password) throw new Error("Senha não conferem")
+            if(!['active','invited','suspended'].includes(st_status.toLowerCase())) throw new Error("Status inválido")
+            if(!['manager','viewer','admin','editor'].includes(st_role.toLowerCase())) throw new Error("Role inválido")
+            if(user_id){
+                let index = database.users.findIndex(u=>u.in_id = user_id)
+                let user  = database.users.find(u=>u.in_id = user_id)
+                database.users[index]={
+                    ...user,
+                    st_name,
+                    st_email,
+                    st_password:await hash(st_password,10),
+                    st_role: st_role?.toLowerCase(),
+                    st_status: st_status?.toLowerCase(),
+                    dt_updated:new Date().toISOString(),
+                    st_sigla: st_name!==user.st_name ? getStSigla(st_name):user.st_sigla
+                }
+            } else{
+                database.users.push({
+                    in_id:database.users.length,
+                    st_name,
+                    st_email,
+                    st_password:await hash(st_password,10),
+                    st_role,
+                    st_status,
+                    st_username:`@${st_name.toLowerCase()}`,
+                    st_sigla:getStSigla(st_name),
+                    dt_created:new Date().toISOString(),
+                    dt_updated:new Date().toISOString(),
+                })
+            }
 
-        return res.redirect("/users/")
+            return res.redirect("/users/")
+        }
+        catch(err){
+            return res.redirect(`/users?error=${err?.message}`)
+        }
     },
 
     async deleteUser(req,res){

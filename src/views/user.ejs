@@ -29,7 +29,7 @@
                   class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
                   placeholder="Jane Doe" 
                   name="st_name"
-                  value="<%=user.st_name%>"
+                  value="<%=user?.st_name%>"
                 />
               </div>
               <div>
@@ -39,24 +39,24 @@
                   class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" 
                   placeholder="jane@example.com" 
                   name="st_email"
-                  value="<%=user.st_email%>"
+                  value="<%=user?.st_email%>"
                 />
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Role</label>
                 <select class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" name="st_role">
-                  <option value="viewer" <%= user.st_role === 'viewer' ? 'selected' : '' %>>Viewer</option>
-                  <option value="editor" <%= user.st_role === 'editor' ? 'selected' : '' %>>Editor</option>
-                  <option value="manager" <%= user.st_role === 'manager' ? 'selected' : '' %>>Manager</option>
-                  <option value="admin" <%= user.st_role === 'admin' ? 'selected' : '' %>>Admin</option>
+                  <option value="viewer" <%= user?.st_role === 'viewer' ? 'selected' : '' %>>Viewer</option>
+                  <option value="editor" <%= user?.st_role === 'editor' ? 'selected' : '' %>>Editor</option>
+                  <option value="manager" <%= user?.st_role === 'manager' ? 'selected' : '' %>>Manager</option>
+                  <option value="admin" <%= user?.st_role === 'admin' ? 'selected' : '' %>>Admin</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Status</label>
                 <select class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-gray-200" name="st_status">
-                  <option value="active" <%= user.st_status === 'active' ? 'selected' : '' %>>Active</option>
-                  <option value="invited" <%= user.st_status === 'invited' ? 'selected' : '' %>>Invited</option>
-                  <option value="suspended" <%= user.st_status === 'suspended' ? 'selected' : '' %>>Suspended</option>
+                  <option value="active" <%= user?.st_status === 'active' ? 'selected' : '' %>>Active</option>
+                  <option value="invited" <%= user?.st_status === 'invited' ? 'selected' : '' %>>Invited</option>
+                  <option value="suspended" <%= user?.st_status === 'suspended' ? 'selected' : '' %>>Suspended</option>
                 </select>
               </div>
               <div>

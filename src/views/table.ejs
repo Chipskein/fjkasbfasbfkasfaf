@@ -1,44 +1,62 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Simple User CRUD – Tailwind</title>
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-50 text-gray-800 antialiased">
-    <%- include('components/header', {}) %>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple User CRUD – Tailwind</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <%- include('components/header', {}) %>
+
+    <%- include('components/error', {}) %>
+    
     <main class="max-w-6xl mx-auto px-4 py-6">
       <!-- Filters / Toolbar (static) -->
       <form action="">
-      <section class="mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <section class="mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <div class="relative">
-              <input type="text" placeholder="Search users..." class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="search"/>
-              <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-gray-500"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 1 0 13.5 6.75 6.75 0 0 1 0-13.5Zm0 1.5a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5Zm8.03 13.28a.75.75 0 1 1-1.06 1.06l-3.25-3.25a.75.75 0 0 1 1.06-1.06l3.25 3.25Z" clip-rule="evenodd"/></svg>
-              </div>
+            <input type="text" placeholder="Search users..."
+              class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+              name="search" />
+            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                class="size-4 text-gray-500">
+                <path fill-rule="evenodd"
+                  d="M10.5 3.75a6.75 6.75 0 1 1 0 13.5 6.75 6.75 0 0 1 0-13.5Zm0 1.5a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5Zm8.03 13.28a.75.75 0 1 1-1.06 1.06l-3.25-3.25a.75.75 0 0 1 1.06-1.06l3.25 3.25Z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
           </div>
-          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="role">
+          <select
+            class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+            name="role">
             <option value="">All Roles</option>
             <option value="admin">Admin</option>
             <option value="manager">Manager</option>
             <option value="editor">Editor</option>
             <option value="viewer">Viewer</option>
           </select>
-          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="status">
+          <select
+            class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+            name="status">
             <option value="">Any Status</option>
             <option value="active">Active</option>
             <option value="invited">Invited</option>
             <option value="Suspended">Suspended</option>
           </select>
-          <select class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200" name="sort">
+          <select
+            class="rounded-2xl border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+            name="sort">
             <option value="new">Sort: Newest</option>
             <option value="old">Sort: Oldest</option>
             <option value="za">Sort: A → Z</option>
             <option value="az">Sort: Z → A</option>
           </select>
-      </section>
+        </section>
       </form>
 
 
@@ -59,81 +77,105 @@
             <tbody class="divide-y divide-gray-100">
               <% for(const user of users) { %>
                 <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">
+                  <td class="px-4 py-3">
                     <div class="flex items-center gap-3">
-                        
-                        <span class="inline-flex size-9 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold">
-                            <%=user.st_sigla %>
+
+                      <% const colors=[ { bg: "bg-indigo-100" , text: "text-indigo-700" }, { bg: "bg-pink-100" ,
+                        text: "text-pink-700" }, { bg: "bg-green-100" , text: "text-green-700" }, { bg: "bg-amber-100" ,
+                        text: "text-amber-700" }, { bg: "bg-blue-100" , text: "text-blue-700" }, { bg: "bg-purple-100" ,
+                        text: "text-purple-700" }, { bg: "bg-red-100" , text: "text-red-700" } ]; const
+                        color=colors[Math.floor(Math.random() * colors.length)]; %>
+
+                        <span
+                          class="inline-flex size-9 items-center justify-center rounded-full text-sm font-semibold <%= color.bg %> <%= color.text %>">
+                          <%= user.st_sigla %>
                         </span>
 
                         <div>
-                        <div class="font-medium">
+                          <div class="font-medium">
                             <%=user.st_name %>
-                        </div>
-                        <div class="text-xs text-gray-500">
+                          </div>
+                          <div class="text-xs text-gray-500">
                             <%=user.st_username %>
-                        </div>
+                          </div>
                         </div>
                     </div>
-                    </td>
-                    <td class="px-4 py-3">
-                        <%=user.st_email %>
-                    </td>
-                    <td class="px-4 py-3">
+                  </td>
+                  <td class="px-4 py-3">
+                    <%=user.st_email %>
+                  </td>
+                  <td class="px-4 py-3">
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium">
-                        <%=user.st_role %>
+                      <%=user.st_role %>
                     </span>
-                    </td>
-                    <td class="px-4 py-3">
-                    <span class="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700">
-                        <span class="size-1.5 rounded-full bg-green-600">
-                            <%=user.st_status %>
-                        </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center gap-1 rounded-full 
+                          <%= user.st_status === 'active' ? 'bg-green-100 text-green-700' : '' %>
+                          <%= user.st_status === 'invited' ? 'bg-yellow-100 text-yellow-800' : '' %>
+                          <%= user.st_status === 'suspended' ? 'bg-gray-200 text-gray-700' : '' %>
+                          px-2.5 py-1 text-xs font-medium">
+
+                      <span class="size-1.5 rounded-full 
+                            <%= user.st_status === 'active' ? 'bg-green-600' : '' %>
+                            <%= user.st_status === 'invited' ? 'bg-yellow-500' : '' %>
+                            <%= user.st_status === 'suspended' ? 'bg-gray-500' : '' %>">
+                      </span>
+
+                      <%= user.st_status?.toUpperCase() %>
                     </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm text-gray-600">
-                      <%= new Date(user.dt_created).toISOString().split('T')[0] %>
-                    </td>
-                    <td class="px-4 py-3">
+
+                  </td>
+                  <td class="px-4 py-3 text-sm text-gray-600">
+                    <%= new Date(user.dt_created).toISOString().split('T')[0] %>
+                  </td>
+                  <td class="px-4 py-3">
                     <div class="flex items-center justify-end gap-2">
-                        <a href="/users/edit/<%=user.in_id%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
-                        <a href="/users/delete/<%=user.in_id%>" class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
+                      <a href="/users/edit/<%=user.in_id%>"
+                        class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
+                      <a href="/users/delete/<%=user.in_id%>"
+                        class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
                     </div>
-                    </td>
+                  </td>
                 </tr>
-              <% } %>
+                <% } %>
             </tbody>
           </table>
         </div>
 
         <!-- Pagination (static) -->
         <div class="flex items-center justify-between px-4 py-3 border-t bg-gray-50">
-          <p class="text-sm text-gray-600">Showing <span class="font-medium">1–10</span> of <span class="font-medium"><%=pagination.totalUsers%></span> users</p>
+          <p class="text-sm text-gray-600">Showing <span class="font-medium">1–10</span> of <span class="font-medium">
+              <%=pagination.totalUsers%>
+            </span> users</p>
           <nav class="inline-flex items-center gap-1">
             <% if(pagination.hasPrevious) { %>
-                <a href="?page=<%=pagination.prevPage%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Previous</a>
-            <%}%>
-            
-            <%for (let page=1;page<=pagination.totalPages;page++){%>
-                <%if(pagination.currentPage === page){%>
+              <a href="?page=<%=pagination.prevPage%>"
+                class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Previous</a>
+              <%}%>
+
+                <%for (let page=1;page<=pagination.totalPages;page++){%>
+                  <%if(pagination.currentPage===page){%>
                     <a href="?page=<%=page%>" class="rounded-xl bg-black text-white px-3 py-1.5 text-sm">
-                        <%=page%>
+                      <%=page%>
                     </a>
-                <%} else {%>
-                    <a href="?page=<%=page%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">
+                    <%} else {%>
+                      <a href="?page=<%=page%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">
                         <%=page%>
-                    </a>
-                <%}%>
-            <%}%>
-            <% if(pagination.hasNext) { %>
-                <a href="?page=<%=pagination.nextPage%>" class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Next</a>    
-            <%}%>
+                      </a>
+                      <%}%>
+                        <%}%>
+                          <% if(pagination.hasNext) { %>
+                            <a href="?page=<%=pagination.nextPage%>"
+                              class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-100">Next</a>
+                            <%}%>
           </nav>
         </div>
 
       </section>
     </main>
     <%- include('components/footer', {}) %>
-  </body>
-  <script src="/header.js"></script>
+</body>
+<script src="/header.js"></script>
+
 </html>
