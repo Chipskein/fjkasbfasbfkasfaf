@@ -106,7 +106,7 @@
                   </td>
                   <td class="px-4 py-3">
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium">
-                      <%=user.st_role %>
+                      <%=user?.st_role?.toUpperCase() %>
                     </span>
                   </td>
                   <td class="px-4 py-3">
@@ -133,8 +133,10 @@
                     <div class="flex items-center justify-end gap-2">
                       <a href="/users/edit/<%=user.in_id%>"
                         class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
-                      <a href="/users/delete/<%=user.in_id%>"
-                        class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
+                      <% if(user?.st_role !=='admin') { %>
+                        <a href="/users/delete/<%=user.in_id%>"
+                          class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
+                      <%}%>
                     </div>
                   </td>
                 </tr>

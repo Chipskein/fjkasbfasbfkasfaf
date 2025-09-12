@@ -9,7 +9,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "active"
       },
       {
@@ -21,7 +21,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "invited"
       },
       {
@@ -33,7 +33,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "suspended"
       },
       {
@@ -45,7 +45,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "active"
       },
       {
@@ -57,7 +57,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "invited"
       },
       {
@@ -69,7 +69,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "suspended"
       },
       {
@@ -81,7 +81,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "active"
       },
       {
@@ -93,7 +93,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "invited"
       },
       {
@@ -105,7 +105,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "suspended"
       },
       {
@@ -117,7 +117,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "active"
       },
       {
@@ -129,7 +129,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "invited"
       },
       {
@@ -141,7 +141,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "suspended"
       },
       {
@@ -153,7 +153,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "active"
       },
       {
@@ -165,7 +165,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "invited"
       },
       {
@@ -177,7 +177,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "suspended"
       },
       {
@@ -189,7 +189,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "active"
       },
       {
@@ -201,7 +201,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "invited"
       },
       {
@@ -213,7 +213,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "suspended"
       },
       {
@@ -225,7 +225,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "active"
       },
       {
@@ -237,7 +237,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "invited"
       },
       {
@@ -249,7 +249,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "suspended"
       },
       {
@@ -261,7 +261,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "active"
       },
       {
@@ -273,7 +273,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "invited"
       },
       {
@@ -285,7 +285,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "suspended"
       },
       {
@@ -297,7 +297,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "active"
       },
       {
@@ -309,7 +309,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "invited"
       },
       {
@@ -321,7 +321,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "suspended"
       },
       {
@@ -333,7 +333,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "active"
       },
       {
@@ -345,7 +345,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "invited"
       },
       {
@@ -357,7 +357,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "suspended"
       },
       {
@@ -369,7 +369,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "active"
       },
       {
@@ -381,7 +381,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "invited"
       },
       {
@@ -393,7 +393,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "suspended"
       },
       {
@@ -405,7 +405,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "active"
       },
       {
@@ -417,7 +417,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "invited"
       },
       {
@@ -429,7 +429,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "suspended"
       },
       {
@@ -441,7 +441,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "active"
       },
       {
@@ -453,7 +453,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "invited"
       },
       {
@@ -465,7 +465,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "suspended"
       },
       {
@@ -477,7 +477,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "active"
       },
       {
@@ -489,7 +489,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "invited"
       },
       {
@@ -501,7 +501,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "suspended"
       },
       {
@@ -513,7 +513,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "active"
       },
       {
@@ -525,7 +525,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "invited"
       },
       {
@@ -537,7 +537,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "suspended"
       },
       {
@@ -549,7 +549,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "active"
       },
       {
@@ -561,7 +561,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Manager",
+        st_role: "manager",
         st_status: "invited"
       },
       {
@@ -573,7 +573,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Viewer",
+        st_role: "viewer",
         st_status: "suspended"
       },
       {
@@ -585,7 +585,7 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Admin",
+        st_role: "admin",
         st_status: "active"
       },
       {
@@ -597,9 +597,11 @@ module.exports = {
         st_password: "",
         dt_created: new Date().toISOString(),
         dt_updated: new Date().toISOString(),
-        st_role: "Editor",
+        st_role: "editor",
         st_status: "invited"
       }
-    ]
+    ],
+    status:['active','invited','suspended'],
+    roles:['admin','editor','viewer','manager']
   }
   

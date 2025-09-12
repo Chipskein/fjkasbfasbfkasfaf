@@ -12,6 +12,16 @@ function getStSigla(st_name) {
     }
     return st_sigla.toUpperCase();
 }
+function isValidJSON(st_json){
+    try{
+        JSON.parse(st_json);
+        return true;
+    } catch(err){
+        return false;
+    }
+}
+
 module.exports={
-    getStSigla
+    getStSigla,
+    isValidJSON
 }

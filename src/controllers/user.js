@@ -3,7 +3,6 @@ const { hash } = require('bcrypt')
 const { convertToCSV } = require('../utils/csv')
 const { getStSigla } = require('../utils/strings')
 module.exports={
-
     async get(req,res){
         const search=req.query?.search || null
         const sort=req.query?.sort || null
@@ -88,11 +87,12 @@ module.exports={
                 st_role,
                 st_status,
             } = req.body
-            if(!st_name|| st_name.trim()=='') throw new Error("Nome invalido")
-            if(!st_email|| st_email.trim()=='') throw new Error("Email invalido")
-            if(st_password!==st_confirm_password) throw new Error("Senha não conferem")
-            if(!['active','invited','suspended'].includes(st_status.toLowerCase())) throw new Error("Status inválido")
-            if(!['manager','viewer','admin','editor'].includes(st_role.toLowerCase())) throw new Error("Role inválido")
+            if(!st_name || st_name?.trim()=='') throw new Error("Nome invalido");
+            if(!st_email || st_email?.trim()=='') throw new Error("Email invalido");
+            if(st_password!==st_confirm_password) throw new Error("Senha não conferem");
+            if(!st_password || st_name?.trim()=='') throw new Error("Senha inválida");
+            if(!database.status.includes(st_status.toLowerCase())) throw new Error("Status inválido")
+            if(!database.roles.includes(st_role.toLowerCase())) throw new Error("Role inválido")
             if(user_id){
                 let index = database.users.findIndex(u=>u.in_id = user_id)
                 let user  = database.users.find(u=>u.in_id = user_id)
