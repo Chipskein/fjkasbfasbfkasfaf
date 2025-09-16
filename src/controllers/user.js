@@ -11,10 +11,29 @@ module.exports={
         const limit = parseInt(req.query?.limit) || 10;
         const page = parseInt(req.query?.page) || 1;
         const offset = (page - 1) * limit;
-        const totalUsers = database.users.length;
-        let users = database.users.slice(offset, offset + limit);
+        let totalUsers = database.users.length;
+        let users = database.users;
+        if(sort){
+            switch(sort.toLowerCase()){
+                case "za":
+                    users.sort((a, b) => b.st_name.localeCompare(a.st_name, undefined, { numeric:true,sensitivity: 'base' }))
+                    break
+
+                case "az":
+                    users.sort((a, b) => a.st_name.localeCompare(b.st_name,undefined, { numeric:true,sensitivity: 'base' }))
+                    break
+
+                case "new":
+                    users.sort((a,b)=>new Date(b.dt_created)-new Date(a.dt_created))
+                    break
+
+                case "old":
+                    users.sort((a,b)=>new Date(a.dt_created)-new Date(b.dt_created))
+                    break
+            }
+        }
         if (search){
-            users = users.filter( u => 
+            users = users.filter( u =>
                 u.st_name.toLowerCase().includes(search.toLowerCase()) ||
                 u.st_email.toLowerCase().includes(search.toLowerCase()) ||
                 u.st_username.toLowerCase().includes(search.toLowerCase())
@@ -22,26 +41,8 @@ module.exports={
         }
         if(role) users = users.filter( u => u.st_role.toLowerCase().includes(role.toLowerCase()))
         if(status) users = users.filter( u => u.st_status.toLowerCase().includes(status.toLowerCase()))
-        if(sort){
-            switch(sort.toLowerCase()){
-                case "za":
-                    users.sort((a, b) => b.st_name.localeCompare(a.st_name))
-                    break
-                
-                case "az":
-                    users.sort((a, b) => a.st_name.localeCompare(b.st_name))
-                    break
-
-                case "new":
-                    users.sort((a,b)=>a.dt_created-b.dt_created)
-                    break
-
-                case "old":
-                    users.sort((a,b)=>b.dt_created-a.dt_created)
-                    break
-            }
-        }
-
+        totalUsers = users.length;
+        users = users.slice(offset, offset + limit);
         const totalPages = Math.ceil(totalUsers / limit);
         const hasNext = page < totalPages;
         const hasPrevious = page > 1;
@@ -62,13 +63,14 @@ module.exports={
     },
 
     async export(req,res){
-        const { users } = database;
-        const csv = convertToCSV(users);
+        let arrUsers = [...database.users];
+        arrUsers.forEach(u=>delete u.st_password)
+        const csv = convertToCSV(arrUsers);
         res.setHeader('Content-Type', 'text/csv');
         res.setHeader('Content-Disposition', `attachment; filename="UsersDump${new Date().getTime()}.csv"`);
         return res.status(200).send(csv);
     },
-    
+
     async renderSaveForm(req,res){
         const { user_id } = req.params
         let user = null
@@ -94,8 +96,8 @@ module.exports={
             if(!database.status.includes(st_status.toLowerCase())) throw new Error("Status inválido")
             if(!database.roles.includes(st_role.toLowerCase())) throw new Error("Role inválido")
             if(user_id){
-                let index = database.users.findIndex(u=>u.in_id = user_id)
-                let user  = database.users.find(u=>u.in_id = user_id)
+                let index = database.users.findIndex(u=>u.in_id == user_id)
+                let user  = database.users.find(u=>u.in_id == user_id)
                 database.users[index]={
                     ...user,
                     st_name,
@@ -135,5 +137,5 @@ module.exports={
         if(foundUser) database.users.splice(index,1)
         return res.redirect('/users')
     }
-    
+
 }

@@ -13,7 +13,7 @@
   <%- include('components/header', {}) %>
 
     <%- include('components/error', {}) %>
-    
+
     <main class="max-w-6xl mx-auto px-4 py-6">
       <!-- Filters / Toolbar (static) -->
       <form action="">
@@ -53,8 +53,8 @@
             name="sort">
             <option value="new">Sort: Newest</option>
             <option value="old">Sort: Oldest</option>
-            <option value="za">Sort: A → Z</option>
-            <option value="az">Sort: Z → A</option>
+            <option value="az">Sort: A → Z</option>
+            <option value="za">Sort: Z → A</option>
           </select>
         </section>
       </form>
@@ -110,13 +110,13 @@
                     </span>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="inline-flex items-center gap-1 rounded-full 
+                    <span class="inline-flex items-center gap-1 rounded-full
                           <%= user.st_status === 'active' ? 'bg-green-100 text-green-700' : '' %>
                           <%= user.st_status === 'invited' ? 'bg-yellow-100 text-yellow-800' : '' %>
                           <%= user.st_status === 'suspended' ? 'bg-gray-200 text-gray-700' : '' %>
                           px-2.5 py-1 text-xs font-medium">
 
-                      <span class="size-1.5 rounded-full 
+                      <span class="size-1.5 rounded-full
                             <%= user.st_status === 'active' ? 'bg-green-600' : '' %>
                             <%= user.st_status === 'invited' ? 'bg-yellow-500' : '' %>
                             <%= user.st_status === 'suspended' ? 'bg-gray-500' : '' %>">
@@ -130,14 +130,14 @@
                     <%= new Date(user.dt_created).toISOString().split('T')[0] %>
                   </td>
                   <td class="px-4 py-3">
+                    <% if(user?.st_role !=='admin') { %>
                     <div class="flex items-center justify-end gap-2">
                       <a href="/users/edit/<%=user.in_id%>"
                         class="rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50">Edit</a>
-                      <% if(user?.st_role !=='admin') { %>
-                        <a href="/users/delete/<%=user.in_id%>"
-                          class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
-                      <%}%>
+                      <a href="/users/delete/<%=user.in_id%>"
+                        class="rounded-xl bg-red-50 px-3 py-1.5 text-sm text-red-700 hover:bg-red-100">Delete</a>
                     </div>
+                    <%}%>
                   </td>
                 </tr>
                 <% } %>
